@@ -24,8 +24,8 @@
       count: 5
       region: "{{ aws_region }}"
       instance_tags:
-        app: "test-deployment"
-        Name: "Test Deployment"
+        app: "wilson-test-deployment"
+        Name: "Wilson Test Deployment"
         version: "{{ build_number }}"
     register: ec2
 
