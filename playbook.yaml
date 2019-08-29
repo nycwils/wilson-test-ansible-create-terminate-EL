@@ -8,15 +8,15 @@
     aws_region: "us-east-2"
     build_number: "{{ lookup('env','BUILD_NUMBER') }}"
     ec2_tags:
-      Name: "Test Deployment"
-      app: "test-deployment"
+      Name: "Wilson Test Deployment"
+      app: "wilson-test-deployment"
     ec2_current_tag:
       build_number: "{{ build_number }}"
 
   tasks:
   - name: ansible create EC2
     ec2:
-      key_name: nyuelin
+      key_name: wilsontest
       instance_type: t2.micro
       image: ami-04328208f4f0cf1fe
       wait: yes
@@ -34,8 +34,8 @@
       region: "{{ aws_region }}"
       filters:
         instance-state-name: running
-        "tag:Name": "Test Deployment"
-        "tag:app": "test-deployment"
+        "tag:Name": "Wilson Test Deployment"
+        "tag:app": "wilson-test-deployment"
     register: ec2_facts
 
   - name: Filter EC2 instances
