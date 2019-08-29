@@ -28,7 +28,7 @@ node('master') {
             sh "pip install --user boto"
             sh "pip install --user boto3"
             
-            sh "ansible-playbook playbook-ansible-create-ec2.yaml -i inventory.txt"
+            sh "ansible-playbook playbook.yaml -i inventory.txt"
 
 
 
