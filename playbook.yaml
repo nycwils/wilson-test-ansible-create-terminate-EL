@@ -20,7 +20,7 @@
       image: ami-0b898040803850657
       wait: yes
       wait_timeout: 500
-      count: 5
+      count: 1
       region: "{{ aws_region }}"
       instance_tags:
         app: "wilson-test-deployment"
