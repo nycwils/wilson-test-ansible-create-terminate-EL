@@ -17,7 +17,11 @@
       Name: "Test Deployment"
       app: "test-deployment"
     ec2_current_tag:
-      build_number: "{{ build_number }}"      
+      build_number: "{{ build_number }}"    
+    instance_tags:
+      app: "test-deployment"
+      Name: "Test Deployment"    
+      version: "{{ build_number }}"      
     count: 1
 
   tasks: 
@@ -49,11 +53,7 @@
                       wait=true
                       region={{ region }}
                       keypair={{ keypair }}
-                      count={{count}}
-      instance_tags:
-      app: "test-deployment"
-      Name: "Test Deployment"    
-      version: "{{ build_number }}"                                  
+                      count={{count}}                                
       register: ec2
 
     - name: ansible filter EC2 by label
