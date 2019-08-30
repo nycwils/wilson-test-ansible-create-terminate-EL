@@ -17,7 +17,7 @@
     ec2:
       key_name: Wilson-Test-EC2KeyPair
       instance_type: t2.micro
-      image: ami-04328208f4f0cf1fe
+      image: ami-0b898040803850657
       wait: yes
       wait_timeout: 500
       count: 5
