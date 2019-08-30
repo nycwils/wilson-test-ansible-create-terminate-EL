@@ -12,6 +12,12 @@
     image: ami-0b898040803850657
     region: us-east-1
     keypair: Wilson-Test-EC2KeyPair
+    build_number: "{{ lookup('env','BUILD_NUMBER') }}"
+    ec2_tags:
+      Name: "Test Deployment"
+      app: "test-deployment"
+    ec2_current_tag:
+      build_number: "{{ build_number }}"      
     count: 1
 
   tasks: 
@@ -44,8 +50,19 @@
                       region={{ region }}
                       keypair={{ keypair }}
                       count={{count}}
-                      
+      instance_tags:
+      app: "test-deployment"
+      Name: "Test Deployment"    
+      version: "{{ build_number }}"                                  
       register: ec2
+
+    - name: ansible filter EC2 by label
+      ec2_instance_facts:
+        filters:
+          instance-state-name: running
+          "tag:Name": "Test Deployment"
+          "tag:app": "test-deployment"
+      register: ec2_facts   
 
     - name: Wait for EC2 Instance to Spin-up and ready for SSH access
       local_action: wait_for
@@ -54,12 +71,17 @@
                       state=started
       with_items: "{{ ec2.instances }}"
 
-    - name: Adding Tags to Identify
-      local_action: ec2_tag resource={{ item.id }} region={{ region }} state=present
-      with_items: "{{ ec2.instances }}"
-      args:
-        tags:
-          Name: wilson-test-web-server
-          Owner: wilson lam
-          #version number or jenkins number put here.  jenkins number or some ways to keep track of deployment.  do another ec2 gather facts.
-          PurPose: provision ec2 then connect and do stuffs
+    - name: Filter EC2 instances
+      set_fact:
+        ec2_instances: |
+          {% set instances = [] %}
+          {% for item in ec2_facts.instances if item.tags.version != build_number -%}
+            {{ instances.append(item.instance_id) }}
+          {%- endfor %}
+          {{ instances }}
+    - name: Terminate EC2 server
+      ec2:
+        region: "{{ aws_region }}"
+        instance_ids: "{{ item }}"
+        state: 'absent'
+      with_items: "{{ ec2_instances }}"
