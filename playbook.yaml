@@ -56,29 +56,29 @@
       register: ec2
 
 
-  - name: ansible filter EC2 by label
-    ec2_instance_facts:
-      region: "{{ region }}"
-      filters:
-        instance-state-name: running
-        "tag:Name": "Wilson Test Deployment"
-        "tag:app": "wilson-test-deployment"
-    register: ec2_facts
+    - name: ansible filter EC2 by label
+      ec2_instance_facts:
+        region: "{{ region }}"
+        filters:
+          instance-state-name: running
+          "tag:Name": "Wilson Test Deployment"
+          "tag:app": "wilson-test-deployment"
+      register: ec2_facts
 
-  - name: Filter EC2 instances
-    set_fact:
-      ec2_instances: |
-        {% set instances = [] %}
-        {% for item in ec2_facts.instances if item.tags.version != build_number -%}
-          {{ instances.append(item.instance_id) }}
-        {%- endfor %}
-        {{ instances }}
-  - name: Terminate EC2 server
-    ec2:
-      region: "{{ region }}"
-      instance_ids: "{{ item }}"
-      state: 'absent'
-    with_items: "{{ ec2_instances }}"
+    - name: Filter EC2 instances
+      set_fact:
+        ec2_instances: |
+          {% set instances = [] %}
+          {% for item in ec2_facts.instances if item.tags.version != build_number -%}
+            {{ instances.append(item.instance_id) }}
+          {%- endfor %}
+          {{ instances }}
+    - name: Terminate EC2 server
+      ec2:
+        region: "{{ region }}"
+        instance_ids: "{{ item }}"
+        state: 'absent'
+      with_items: "{{ ec2_instances }}"
 
 
   # vars:
