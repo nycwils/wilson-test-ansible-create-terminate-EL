@@ -6,6 +6,7 @@
   vars:
     aws_region: "us-east-2"
     build_number: "{{ lookup('env','BUILD_NUMBER') }}"
+    keypair: Wilson-Test-EC2KeyPair
     ec2_tags:
       Name: "Test Deployment"
       app: "test-deployment"
@@ -15,7 +16,7 @@
   tasks:
   - name: ansible create EC2
     ec2:
-      key_name: nyueWilson-Test-EC2KeyPairlin
+      keypair: "{{ keypair }}"
       instance_type: t2.micro
       image: ami-04328208f4f0cf1fe
       wait: yes
