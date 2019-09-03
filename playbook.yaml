@@ -37,7 +37,7 @@
         "tag:app": "wilson-test-deployment"
     register: ec2_facts
 
-  - name: see whats the file like.  i want to store the instances.id somewhere for later use.  
+  - name: see whats in the directory  
     command: ls
 
   - name: see what directory we're in..  
