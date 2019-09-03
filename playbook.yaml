@@ -37,6 +37,12 @@
         "tag:app": "wilson-test-deployment"
     register: ec2_facts
 
+  - name: see whats the file like.  i want to store the instances.id somewhere for later use.  
+    command: ls
+
+  - name: see what directory we're in..  
+    command: pwd
+
   # - name: Update all packages
   #   yum:
   #     name: '*'
