@@ -23,7 +23,7 @@ node('master') {
             sh "cp \$mySecretKey /var/lib/jenkins/workspace/wilson-test-ansible-create-terminate-EL"
             sh "ls"
             //sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
-            sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
+            sh "chmod 0400 wilson-test-sps-keypair.pem"
             sh "python --version"
             sh "pip --version"
             sh "pip install --user boto"
