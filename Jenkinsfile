@@ -19,8 +19,8 @@ node('master') {
             sh "ls"
             
             //sh "rm Wilson-Test-EC2KeyPair.pem"
-            sh "chmod -R 777 /var/lib/jenkins/workspace/wilson-test-ansible-create-terminate-EL"
-            sh "cp \$mySecretKey /var/lib/jenkins/workspace/wilson-test-ansible-create-terminate-EL"
+            sh "chmod -R 777 /var/lib/jenkins/workspace/wilson-test-pipeline"
+            sh "cp \$mySecretKey /var/lib/jenkins/workspace/wilson-test-pipeline"
             sh "ls"
             //sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
             sh "chmod 0400 wilson-test-sps-keypair.pem"
