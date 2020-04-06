@@ -17,7 +17,7 @@
     ec2:
       key_name: wilson-test-sps-keypair
       instance_type: t2.micro
-      image: ami-0b898040803850657
+      image: ami-0fc61db8544a617ed
       wait: yes
       wait_timeout: 500
       count: 1
