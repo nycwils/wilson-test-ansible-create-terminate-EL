@@ -12,7 +12,7 @@ node('master') {
     stage("Run Ancible Playbook") {
 
         
-            withCredentials([file(credentialsId: '92045f3a-fdb3-491e-ad2e-d6b9fe7aa3e5', variable: 'mySecretKey')]){
+            withCredentials([file(credentialsId: 'wilson-test-pem', variable: 'mySecretKey')]){
 
             sh "pwd"
             sh "pwd"
