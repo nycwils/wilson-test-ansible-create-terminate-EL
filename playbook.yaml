@@ -15,7 +15,7 @@
   tasks:
   - name: ansible create EC2
     ec2:
-      key_name: Wilson-Test-EC2KeyPair
+      key_name: wilson-test-sps-keypair
       instance_type: t2.micro
       image: ami-0b898040803850657
       wait: yes
