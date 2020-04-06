@@ -1,5 +1,5 @@
 - name: Create and terminate EC2 instances
-  hosts: target2
+  hosts: localhost
   connection: local
   gather_facts: no
   
