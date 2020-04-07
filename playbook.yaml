@@ -10,10 +10,7 @@
       Name: "Test Deployment"
       app: "test-deployment"
     ec2_current_tag:
-      build_number: "{{ build_number }}"
-      
-  - name: see whats in the directory  
-    command: ls      
+      build_number: "{{ build_number }}"   
       
   tasks:
   - name: ansible create EC2
