@@ -16,7 +16,7 @@ node('master') {
 
             sh "pwd"
             sh "pwd"
-            //sh "ls"
+            sh "ls"
             
             //sh "rm Wilson-Test-EC2KeyPair.pem"
             sh "chmod -R 777 /var/lib/jenkins/workspace/wilson-test-pipeline"
